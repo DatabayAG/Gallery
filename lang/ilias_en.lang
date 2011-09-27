@@ -1,0 +1,63 @@
+// 
+// English Language File for GalleryObject Plugin
+//
+
+<!-- language file start -->
+obj_xgal#:#Gallery
+objs_xgal#:#Gallery
+obj_xgal_duplicate#:#Copy
+objs_xgal_duplicate#:#Copy Gallery
+obj_xgal_select#:#Select Gallery
+xgal_add#:#Add Gallery
+xgal_new#:#Add New Gallery
+xgal_read#:#Read access to Gallery
+xgal_write#:#Edit Gallery
+xgal_delete#:#Delete Gallery
+xgal_visible#:#Gallery is visible
+xgal_edit_permission#:#Change permission settings
+crs_create_xgal#:#Create Gallery
+grp_create_xgal#:#Create Gallery
+fold_create_xgal#:#Create Gallery
+root_create_xgal#:#Create Gallery
+cat_create_xgal#:#Create Gallery
+content#:#Gallery
+properties#:#Properties
+edit_properties#:#Edit Properties
+title#:#Title
+description#:#Description
+option_one#:#Option One
+option_two#:#Option Two
+save#:#Save
+cancel#:#Cancel
+edit#:#Edit
+status#:#Status
+offline#:#Offline
+gallery_plugin_configuration#:#Gallery Plugin Configuration
+setting_1#:#Setting 1
+setting_2#:#Setting 2
+saving_invoked#:#Save procedure has been executed. Please note that this gallery does not save anything to DB.
+neues_album_anlegen#:#Create new gallery
+titel#:#Title
+album_anlegen#:#Create gallery
+vom#:#from
+neues_foto#:#Send new picture
+album_loeschen#:#Delete gallery
+markierte_loeschen#:#Delete marked pictures
+change_info#:#Change galleryinfos
+datum#:#Date
+sichtbarkeit#:#Visibility
+oeffentlich#:#public
+privat#:#private
+sichern#:#Save changes
+markbilder#:#Check to delete the selected pictures!
+markalbum#:#Check to delete the gallery with containing pictures!
+bild#:#Picture
+oder#:#or
+mehrere_bilder_senden#:#Send multiple images at once
+infomulti#:#Click here to open filerequester.<br/>Hold STRG or shift to select multiple files.
+uploadliste#:#Upload-List
+meine_alben#:#my galleries
+freie_alben#:#public galleries
+plugininfo#:#Plugin-Information
+Bild#:#Picture
+Bilder#:#Pictures

@@ -1,0 +1,59 @@
+// 
+// German Language File for GalleryObject Plugin
+//
+
+<!-- language file start -->
+obj_xgal#:#Galerie
+objs_xgal#:#Galerie
+obj_xgal_duplicate#:#Kopieren
+objs_xgal_duplicate#:#Kopiere Galerie
+obj_xgal_select#:#Wähle Galerie
+xgal_add#:#Füge Galerie hinzu
+xgal_new#:#Neue Galerie
+xgal_read#:#Galerie ansehen
+xgal_write#:#Galerie bearbeiten
+xgal_delete#:#Galerie löschen
+xgal_visible#:#Galerie ist sichtbar
+xgal_edit_permission#:#Ändere Rechte
+crs_create_xgal#:#Erzeuge Galerie
+grp_create_xgal#:#Erzeuge Galerie
+fold_create_xgal#:#Erzeuge Galerie
+root_create_xgal#:#Erzeuge Galerie
+cat_create_xgal#:#Erzeuge Galerie
+content#:#Galerie
+properties#:#Einstellungen
+edit_properties#:#Einstellungen bearbeiten
+title#:#Titel
+description#:#Beschreibung
+save#:#Speichern
+cancel#:#Abbruch
+edit#:#Bearbeiten
+status#:#Status
+offline#:#Offline
+gallery_plugin_configuration#:#Galerie Plugin Konfiguration
+saving_invoked#:#Save procedure has been executed. Please note that this gallery does not save anything to DB.
+neues_album_anlegen#:#Neues Album anlegen
+titel#:#Titel
+album_anlegen#:#Album anlegen
+vom#:#vom
+neues_foto#:#Neues Foto übertragen
+album_loeschen#:#Album löschen
+markierte_loeschen#:#Markierte Bilder löschen
+change_info#:#Albumdaten ändern
+datum#:#Datum
+sichtbarkeit#:#Sichtbarkeit
+oeffentlich#:#öffentlich
+privat#:#privat
+sichern#:#Änderungen &uuml;bernehmen
+markbilder#:#Hier markieren, wenn Sie die markierten Bilder wirklich l&ouml;schen wollen!
+markalbum#:#Hier markieren, wenn Sie das Album mit allen Bildern wirklich l&ouml;schen wollen!
+bild#:#Bild
+oder#:#oder
+mehrere_bilder_senden#:#Mehrere Bilder auf einmal senden
+infomulti#:#Klicken Sie hier um die zu übertragenden Dateien auszuwählen.<br/>Sie können durch Drücken von Strg oder Shift mehrere Dateien auf einmal auswählen.
+uploadliste#:#Upload-Liste
+meine_alben#:#meine Alben
+freie_alben#:#freigegebene Alben
+plugininfo#:#Plugin-Information
+Bild#:#Bild
+Bilder#:#Bilder
