@@ -266,11 +266,14 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 		$publics = array();
 		$user = glob($this->objDir.'/*');
 		for($i=0;$i<count($user);$i++) {
-		    if(basename($user[$i])!=$userID) {
+		    if(basename($user[$i])!=$userID && file_exists($user[$i].'/albums.ser')) {
 			$publics[basename($user[$i])] = unserialize(file_get_contents($user[$i].'/albums.ser'));
 			for($j=0;$j<count($publics[basename($user[$i])]);$j++) {
 			    #vd($publics[basename($user[$i])][$j]);
 			    $publics[basename($user[$i])][$j]["files"] = glob($this->objDir.'/'.basename($user[$i]).'/'.$publics[basename($user[$i])][$j]['id'].'/*.jpg');
+                            #if(file_exists($this->objDir.'/'.basename($user[$i]).'/'.$publics[basename($user[$i])][$j]['id'].'/pictures.ser')) {
+                            #        $publics[basename($user[$i])][$j]["pictures"] = unserialize(file_get_contents($this->objDir.'/'.basename($user[$i]).'/'.$publics[basename($user[$i])][$j]['id'].'/pictures.ser'));
+                            #}
 			}
 		    }
 		}
@@ -289,9 +292,12 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 			$albums = array();
 		    } else {
 			$albums = unserialize(file_get_contents($this->dataDir.'/albums.ser'));
+                        #vd($albums);exit;
 			for($i=0;$i<count($albums);$i++) {
 			    $albums[$i]["files"] = glob($this->dataDir.'/'.$albums[$i]['id'].'/*.jpg');
+                            if(file_exists($this->dataDir.'/'.$albums[$i]['id'].'/pictures.ser')) $albums[$i]["pictures"] = unserialize(file_get_contents($this->dataDir.'/'.$albums[$i]['id'].'/pictures.ser'));
 			}
+                        #vd($albums);exit;
 		    }
 
 		    if($_POST['newalbumtitle']!='') {
@@ -381,6 +387,7 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 			chmod($this->albumDir.'/pictures.ser', 0664);
 		    } else {
 			$pictures = unserialize(file_get_contents($this->albumDir.'/pictures.ser'));
+                        #vd($pictures);exit;
 		    }
 
 		    if($_POST['deletepictures']==1) {
@@ -454,14 +461,25 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 			$wh = getImageSize($fn);
 			$w = $wh[0];
 			$h = $wh[1];
-			if( ($_GET["upscale"]==1 && $w<>$_GET["width"]) || ($_GET["upscale"]!=1 && $w>$_GET["width"]) ) {
-			    $h = $h * ($_GET["width"]/$w);
-			    $w = $_GET["width"];
-			}
-			if($h>$_GET["height"]) {
-			    $w = $w * ($_GET["height"]/$h);
-			    $h = $_GET["height"];
-			}
+                        if($_GET["quad"]==1) {
+                            if( ($_GET["upscale"]==1 && $w<>$_GET["width"]) || ($_GET["upscale"]!=1 && $w>$_GET["width"]) ) {
+                                $h = $h * ($_GET["width"]/$w);
+                                $w = $_GET["width"];
+                            }
+                            if($h<$_GET["height"]) {
+                                $w = $w * ($_GET["height"]/$h);
+                                $h = $_GET["height"];
+                            }
+                        } else {
+                            if( ($_GET["upscale"]==1 && $w<>$_GET["width"]) || ($_GET["upscale"]!=1 && $w>$_GET["width"]) ) {
+                                $h = $h * ($_GET["width"]/$w);
+                                $w = $_GET["width"];
+                            }
+                            if($h>$_GET["height"]) {
+                                $w = $w * ($_GET["height"]/$h);
+                                $h = $_GET["height"];
+                            }
+                        }
 			#phpinfo();
 			$w = floor($w);
 			$h = floor($h);

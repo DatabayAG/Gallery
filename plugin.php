@@ -4,7 +4,7 @@
 $id = "xgal";
  
 // code version; must be changed for all code changes
-define('xgal_version', '0.0.8');
+define('xgal_version', '0.0.9');
 $version = xgal_version;
  
 // ilias min and max version; must always reflect the versions that should
