@@ -33,93 +33,134 @@
 	    }
 	</script>
 
+	<style>
+	    .around {
+		padding: 5px;
+		border: solid 1px silver;
+		border-radius: 5px;
+	    }
+	    </style>
+
+	    <br/><br/>
+
 	<div id="newPhoto" style="display: <?php echo ($VARS->getInt('openUpload')==1 ? 'block' : 'none'); ?>;">
-	    <h2><?php echo $this->txt('neues_foto');?></h2>
-	    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="sendphoto" value="1" />
-		<table>
-		    <tr><td><?php echo $this->txt('titel');?>:</td>
-		    <td><input type="text" name="newphototitle" value="" /></td></tr>
-		    <tr><td><?php echo $this->txt('bild');?> (.jpg)</td>
-		    <td><input type="file" name="newphoto" /></td></tr>
-		    <tr>
-			<td></td>
-			<td><br/>
-			    <input type="submit" value="<?php echo $this->txt('neues_foto');?>" class="submit" />
-			</td>
-		    </tr>
-		</table>
-	    </form>
 
-	    <div style='padding: 5px 0 5px 0;'><?php echo $this->txt('oder');?></div>
+	    <div class="around">
+		<img src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/images/close.png" style="float:right;" onmouseover="style.cursor='pointer';" onclick="closeAll();" />
+		<h2><?php echo $this->txt('neues_foto');?></h2>
+		<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
+		    <input type="hidden" name="sendphoto" value="1" />
+		    <table>
+			<tr><td><?php echo $this->txt('titel');?>:</td>
+			<td><input type="text" name="newphototitle" value="" /></td></tr>
+			<tr><td><?php echo $this->txt('bild');?> (.jpg)</td>
+			<td><input type="file" name="newphoto" /></td></tr>
+			<tr>
+			    <td></td>
+			    <td><br/>
+				<input type="submit" value="<?php echo $this->txt('neues_foto');?>" class="submit" />
+			    </td>
+			</tr>
+		    </table>
+		</form>
 
-	    <h2><?php echo $this->txt('mehrere_bilder_senden');?></h2>
+		<script>
+		var hasFlash = false;
+		try {
+		  var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+		  if(fo) hasFlash = true;
+		}catch(e){
+		  if(navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) hasFlash = true;
+		}
+		</script>
 
-	    <?php include dirname(__FILE__).'/tpl.multiupload_head.php'; ?>
+		<div style="display:none;" id="enableflashupload">
+		<div style='padding: 5px 0 5px 0;'><?php echo $this->txt('oder');?></div>
 
-		<div id='flup'>
-			<table><tr><td>
-			<span id="spanButtonPlaceHolder"></span>
-			<input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="display:none;margin-left: 2px; font-size: 8pt; height: 29px;" />
-			</td><td>
-			    <?php echo $this->txt('infomulti');?>
-			</td></tr></table>
+		<h2><?php echo $this->txt('mehrere_bilder_senden');?></h2>
+
+		<?php include dirname(__FILE__).'/tpl.multiupload_head.php'; ?>
+
+		    <div id='flup'>
+			    <table><tr><td>
+			    <span id="spanButtonPlaceHolder"></span>
+			    <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="display:none;margin-left: 2px; font-size: 8pt; height: 29px;" />
+			    </td><td>
+				<?php echo $this->txt('infomulti');?>
+			    </td></tr></table>
+		    </div>
+		    <br>
+		    <div class="fieldset flash" id="fsUploadProgress" style="display:block;">
+			    <span class="legend"><?php echo $this->txt('uploadliste');?></span>
+		    </div>
+		    <div id="fluplist">
+			    <div id="fluplist2"></div>
+			    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" id="uploadmultiform">
+				<input type="hidden" name="uploadmultifiles" id="uploadmultifiles" value="" />
+			    </form>
+		    </div>
+
+		    </div>
+		 <script>
+		    if(hasFlash==true) document.getElementById('enableflashupload').style.display = 'block';
+		</script>
+
 		</div>
-		<br>
-		<div class="fieldset flash" id="fsUploadProgress" style="display:block;">
-			<span class="legend"><?php echo $this->txt('uploadliste');?></span>
-		</div>
-		<div id="fluplist">
-			<div id="fluplist2"></div>
-			<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" id="uploadmultiform">
-			    <input type="hidden" name="uploadmultifiles" id="uploadmultifiles" value="" />
-			</form>
-		</div>
-
-
 	</div>
 
 	<div id="editAlbum" style="display: none;">
-	    <h2><?php echo $this->txt('change_info');?></h2>
-	    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="sendalbumdata" value="1" />
-		<table>
-		    <tr><td><?php echo $this->txt('titel');?>:</td><td>
-			<input type="text" name="albumtitle" value="<?php  echo $albumSelect->get('name'); ?>" /><br/>
-		    </td></tr>
-		    <tr><td><?php echo $this->txt('datum');?>:</td><td>
-			<input type="text" name="albumdatum" value="<?php echo date("d.m.Y", $albumSelect->get('date')); ?>" /><br/>
-		    </td></tr>
-		    <tr><td><?php echo $this->txt('sichtbarkeit');?>:</td><td>
-			<select name="albumvisible">
-			    <option value="public"><?php echo $this->txt('oeffentlich');?></option>
-			    <option value="private" <?php if ($albumSelect->get('visible')=='private') echo "selected"; ?>><?php echo $this->txt('privat');?></option>
-			</select>
-		    </td></tr>
-		     <tr>
-			<td></td>
-			<td><br/>
-		<input type="submit" value="<?php echo $this->txt('sichern');?>" class="submit" />
-			    </td>
-		    </tr>
-		</table>
-	    </form>
+    	    <div class="around">
+		<img src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/images/close.png" style="float:right;" onmouseover="style.cursor='pointer';" onclick="closeAll();" />
+
+		<h2><?php echo $this->txt('change_info');?></h2>
+		<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
+		    <input type="hidden" name="sendalbumdata" value="1" />
+		    <table>
+			<tr><td><?php echo $this->txt('titel');?>:</td><td>
+			    <input type="text" name="albumtitle" value="<?php  echo $albumSelect->get('name'); ?>" /><br/>
+			</td></tr>
+			<tr><td><?php echo $this->txt('datum');?>:</td><td>
+			    <input type="text" name="albumdatum" value="<?php echo date("d.m.Y", $albumSelect->get('date')); ?>" /><br/>
+			</td></tr>
+			<tr><td><?php echo $this->txt('sichtbarkeit');?>:</td><td>
+			    <select name="albumvisible">
+				<option value="public"><?php echo $this->txt('oeffentlich');?></option>
+				<option value="private" <?php if ($albumSelect->get('visible')=='private') echo "selected"; ?>><?php echo $this->txt('privat');?></option>
+			    </select>
+			</td></tr>
+			 <tr>
+			    <td></td>
+			    <td><br/>
+				<input type="submit" value="<?php echo $this->txt('sichern');?>" class="submit" />
+				</td>
+			</tr>
+		    </table>
+		</form>
+	    </div>
 	</div>
 
 	<div id="deleteAlbum" style="display: none;">
-	    <h2><?php echo $this->txt('album_loeschen');?></h2>
-	    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
-		<input type="checkbox" value="1" name="deletealbum" /> <?php echo $this->txt('markalbum');?><br/>
-		<br/>
-		<input type="submit" value="<?php echo $this->txt('album_loeschen');?>" class="submit" />
-	    </form>
+       	    <div class="around">
+		<img src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/images/close.png" style="float:right;" onmouseover="style.cursor='pointer';" onclick="closeAll();" />
+
+		<h2><?php echo $this->txt('album_loeschen');?></h2>
+		<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
+		    <input type="checkbox" value="1" name="deletealbum" /> <?php echo $this->txt('markalbum');?><br/>
+		    <br/>
+		    <input type="submit" value="<?php echo $this->txt('album_loeschen');?>" class="submit" />
+		</form>
+	    </div>
 	</div>
 
 	<div id="deletePictures" style="display: none;">
-	    <h2><?php echo $this->txt('markierte_loeschen');?></h2>
-	    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
-		<input type="checkbox" value="1" name="deletebilder" onclick="document.getElementById('deletepictures').value=(this.checked ? 1 : 0);"/> <?php echo $this->txt('markbilder');?><br/>
-		<br/>
-		<input type="button" value="<?php echo $this->txt('markierte_loeschen');?>" onclick="document.getElementById('deletepicturesform').submit();" class="submit" />
-	    </form>
+       	    <div class="around">
+		<img src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/images/close.png" style="float:right;" onmouseover="style.cursor='pointer';" onclick="closeAll();" />
+
+		<h2><?php echo $this->txt('markierte_loeschen');?></h2>
+		<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data">
+		    <input type="checkbox" value="1" name="deletebilder" onclick="document.getElementById('deletepictures').value=(this.checked ? 1 : 0);"/> <?php echo $this->txt('markbilder');?><br/>
+		    <br/>
+		    <input type="button" value="<?php echo $this->txt('markierte_loeschen');?>" onclick="document.getElementById('deletepicturesform').submit();" class="submit" />
+		</form>
+	    </div>
 	</div>
