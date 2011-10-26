@@ -483,10 +483,14 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 			#phpinfo();
 			$w = floor($w);
 			$h = floor($h);
-			$im = imageCreateTrueColor($_GET["width"], $_GET["height"]);
-			imagefilledrectangle($im, 0, 0, $_GET["width"], $_GET["height"], imageColorAllocate($im, 255,255,255));
+			if($_GET["quad"]==1) {
+			    $im = imageCreateTrueColor($_GET["width"], $_GET["height"]);
+			} else {
+			    $im = imageCreateTrueColor($w, $h);
+			}
+			imagefilledrectangle($im, 0, 0, imageSx($im), imageSy($im), imageColorAllocate($im, 255,255,255));
 			$im2 = imageCreateFromJpeg($fn);
-			imagecopyresampled($im, $im2, $_GET["width"]/2-$w/2,$_GET["height"]/2-$h/2,0,0,$w, $h, $wh[0], $wh[1]);
+			imagecopyresampled($im, $im2, imageSx($im)/2-$w/2,imageSy($im)/2-$h/2,0,0,$w, $h, $wh[0], $wh[1]);
 			header('Content-type: image/jpeg');
 			imageJpeg($im);
 			exit;

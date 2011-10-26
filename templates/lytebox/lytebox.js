@@ -31,7 +31,7 @@ function Lytebox() {
 		this.theme				= 'black';		// themes: black (default), grey, red, green, blue, gold, orange
 		this.innerBorder		= true;			// controls whether to show the inner border around image/html content
 		this.outerBorder		= true;			// controls whether to show the outer grey (or theme) border
-		this.resizeSpeed		= 8;			// controls the speed of the image resizing (1=slowest and 10=fastest)
+		this.resizeSpeed		= 10;			// controls the speed of the image resizing (1=slowest and 10=fastest)
 		this.maxOpacity			= 80;			// higher opacity = darker overlay, lower opacity = lighter overlay
 		this.borderSize			= 12;			// if you adjust the padding in the CSS, you will need to update this variable -- otherwise, leave this alone...
 		this.appendQS			= false;		// if true, will append request_from=lytebox to the QS. Use this with caution as it may cause pages to not render
@@ -740,7 +740,7 @@ Lytebox.prototype.showContent = function() {
 				var wStyle = ifrm.document.body.style;
 				wStyle.margin = 0;
 				wStyle.padding = 0;
-				wStyle.backgroundColor = '#fff';
+				wStyle.backgroundColor = '#000000';
 				wStyle.fontFamily = 'Verdana, Helvetica, sans-serif';
 				wStyle.fontSize = '0.9em';
 			} else {
