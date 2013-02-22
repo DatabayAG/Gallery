@@ -18,7 +18,7 @@ include_once("./Services/Repository/classes/class.ilObjectPluginGUI.php");
 *   screens) and ilInfoScreenGUI (handles the info screen).
 *
 * @ilCtrl_isCalledBy ilObjGalleryGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
-* @ilCtrl_Calls ilObjGalleryGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI
+* @ilCtrl_Calls ilObjGalleryGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI
 *
 */
 class ilObjGalleryGUI extends ilObjectPluginGUI
