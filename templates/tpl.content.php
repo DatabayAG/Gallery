@@ -1,5 +1,9 @@
+<!--
 <script type="text/javascript" language="javascript" src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/lytebox/lytebox.js"></script>
 <link rel="stylesheet" href="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/lytebox/lytebox.css" type="text/css" media="screen" />
+-->
+<script type="text/javascript" language="javascript" src="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/fancybox/jquery.fancybox-1.3.4.js"></script>
+<link rel="stylesheet" href="Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/templates/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 
 <table><tr>
 <?php if($VARS->getInt('writePermission')==1)	 { ?>

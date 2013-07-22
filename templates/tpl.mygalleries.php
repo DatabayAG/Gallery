@@ -1,3 +1,4 @@
+
 	<?php echo $this->txt('obj_xgal');?>: <b><?php  echo $albumSelect->get('name'); ?></b> <?php echo $this->txt('vom');?> <b><?php echo ilDatePresentation::formatDate(new ilDate(date("Y-m-d",$albumSelect->get('date')),IL_CAL_DATE)); ?></b>
 	<hr size="1" />
 
@@ -5,7 +6,7 @@
 	    <input type="hidden" name="deletepictures" id="deletepictures" value="0" />
 	    <?php foreach($VARS->get('pictures') as $key => $picture) { ?>
 		<div style="margin:0 5px 5px 0;border: solid 1px gray;background-color: white;float:left;padding:5px;">
-		    <a href="<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=1000&height=800" class="lytebox" data-lyte-options="group:album" data-title="<?php echo $picture->get('title');?>" onclick="return false;"><img src='<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=100&height=100&upscale=1&quad=1' width="100" height="100" /></a><br/>
+		    <a href="<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=1000&height=800" rel="img_group" class="lytebox" data-lyte-options="group:album" data-title="<?php echo $picture->get('title');?>" title="<?php echo $picture->get('title');?>" onclick="return false;"><img src='<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=100&height=100&upscale=1&quad=1' title="<?php echo $picture->get('title');?>" width="100" height="100" /></a><br/>
 		    <div style="height:12px;width:100px;overflow:hidden;font-size:7pt;padding-top:3px;">
 			<table cellspacing="0" cellpadding="0"><tr><td><input type=checkbox value='<?php echo $key;?>' name="pix[]" style="padding:0;margin:0;"></td><td nowrap valign="top"><nobr><?php echo $picture->get('title');?></nobr></td></tr></table>
 		    </div>
@@ -31,6 +32,11 @@
 		document.getElementById('deletePictures').style.display = 'none';
 		document.getElementById('deleteAlbum').style.display = 'none';
 	    }
+	    
+	    $(function() {
+	    		    $('a[rel=img_group]').fancybox({'type' : 'image'});
+	    });
+	    
 	</script>
 
 	<style>
