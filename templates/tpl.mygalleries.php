@@ -78,39 +78,151 @@
 		}catch(e){
 		  if(navigator.mimeTypes ["application/x-shockwave-flash"] != undefined) hasFlash = true;
 		}
+		
+		var inp = document.createElement("input");
+		inp.setAttribute("multiple", "true");
+		var supportsMultiple = inp.multiple===true;
+		if(supportsMultiple) hasFlash = false;
+		
 		</script>
 
 		<div style="display:none;" id="enableflashupload">
-		<div style='padding: 5px 0 5px 0;'><?php echo $this->txt('oder');?></div>
+			<div style='padding: 5px 0 5px 0;'><?php echo $this->txt('oder');?></div>
+	
+			<h2><?php echo $this->txt('mehrere_bilder_senden');?></h2>
+	
+			<?php include dirname(__FILE__).'/tpl.multiupload_head.php'; ?>
 
-		<h2><?php echo $this->txt('mehrere_bilder_senden');?></h2>
-
-		<?php include dirname(__FILE__).'/tpl.multiupload_head.php'; ?>
-
-		    <div id='flup'>
-			    <table><tr><td>
-			    <span id="spanButtonPlaceHolder"></span>
-			    <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="display:none;margin-left: 2px; font-size: 8pt; height: 29px;" />
-			    </td><td>
-				<?php echo $this->txt('infomulti');?>
-			    </td></tr></table>
-		    </div>
-		    <br>
-		    <div class="fieldset flash" id="fsUploadProgress" style="display:block;">
-			    <span class="legend"><?php echo $this->txt('uploadliste');?></span>
-		    </div>
-		    <div id="fluplist">
-			    <div id="fluplist2"></div>
-			    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" id="uploadmultiform">
-				<input type="hidden" name="uploadmultifiles" id="uploadmultifiles" value="" />
-			    </form>
-		    </div>
+			    <div id='flup'>
+				    <table><tr><td>
+				    <span id="spanButtonPlaceHolder"></span>
+				    <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="display:none;margin-left: 2px; font-size: 8pt; height: 29px;" />
+				    </td><td>
+					<?php echo $this->txt('infomulti');?>
+				    </td></tr></table>
+			    </div>
+			    <br>
+			    <div class="fieldset flash" id="fsUploadProgress" style="display:block;">
+				    <span class="legend"><?php echo $this->txt('uploadliste');?></span>
+			    </div>
+			    <div id="fluplist">
+				    <div id="fluplist2"></div>
+				    <form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" id="uploadmultiform">
+					<input type="hidden" name="uploadmultifiles" id="uploadmultifiles" value="" />
+				    </form>
+			    </div>
 
 		    </div>
 		 <script>
 		    if(hasFlash==true) document.getElementById('enableflashupload').style.display = 'block';
 		</script>
 
+		
+		<div style="display:none;" id="enablemultiupload2">
+			<div style='padding: 5px 0 5px 0;'><?php echo $this->txt('oder');?></div>
+			<h2><?php echo $this->txt('mehrere_bilder_senden');?></h2>
+			
+			<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" id="uploadmultiform2">
+				<input type="hidden" name="uploadmultifiles" id="uploadmultifiles2" value="" />
+				<input type="file" multiple id="uploadmulti2" onchange="uploadFiles();">
+			</form>
+			<?php echo $this->txt('infomulti');?>
+			
+
+
+			<script>
+			
+			var fileList = [];
+			function uploadFiles() {
+				var obj = document.getElementById("uploadmulti2");
+			
+				for(var i=0;i<obj.files.length;i++) {
+					var filename = obj.files[i].name;
+					var ext = filename.split(".");
+					if(ext.length==0) continue;
+					ext = ext[ext.length-1].toLowerCase();
+					if(ext!="jpg") continue;
+					
+					uploadsToDo++;
+					fileList.push(obj.files[i]);
+				}
+				setTimeout(function() { runUploads(); }, 100);
+			}
+			
+			function runUploads() {
+			
+				if(running>1) {
+					setTimeout(function() { runUploads(); }, 100);
+					return;
+				}
+			
+				if(fileList.length>0) {
+					var file = fileList.pop();
+					uploadOneFile(file);
+					setTimeout(function() { runUploads(); }, 100);
+				}
+			}
+			
+			var progressNr=0;
+			var uploadsToDo = 0;
+			var running = 0;
+			
+			function uploadOneFile(file) {
+			//console.log(file);
+				running++;
+			
+				progressNr++;
+				progress = '<div id="progressBarDiv' + progressNr + '"><progress id="progressBar' + progressNr + '" value="0" max="100" style="width:300px;"></progress>&nbsp;'+file.name+'</div>';
+			
+				var obj = document.getElementById("fluplist2");
+				$(obj).append(progress);
+			
+				//console.log(progressNr);
+				//return;
+			
+				var formdata = new FormData();
+				formdata.append("Filedata", file );
+			
+				var ajax = new XMLHttpRequest();
+				progressData = {
+					"id": 'progressBar' + progressNr,
+					"id2": 'progressBarDiv' + progressNr,
+					"progress": function(event) {
+						var percent = (event.loaded / event.total) * 100;
+						$('#' + this.id).val(Math.round(percent));
+					},
+					"done": function(event) {
+						var T = event.target.responseText;
+						$('#' + this.id2).remove();
+						uploadsToDo--;
+						running--;
+						document.getElementById('uploadmultifiles2').value += file.name+',';
+						if(uploadsToDo==0) {
+							//window.location = '';
+							//alert("Fertig");
+							document.getElementById('uploadmultiform2').submit();
+						}
+					}
+			
+				};
+				ajax.upload.addEventListener("progress", $.proxy(progressData.progress, progressData), false);
+			
+				ajax.addEventListener("load", $.proxy(progressData.done, progressData), false);
+				ajax.addEventListener("error", function(event) { }, false);
+				ajax.addEventListener("abort", function(event) { }, false);
+				ajax.open("POST", "Customizing/global/plugins/Services/Repository/RepositoryObject/Gallery/upload.php?album_id=<?php echo $_GET['album_id'] ?>&ilClientId=<?php echo $_COOKIE['ilClientId']; ?>");
+				ajax.send(formdata);
+			}
+			
+			</script>			
+			
+		</div>
+		
+		 <script>
+		    if(supportsMultiple==true) document.getElementById('enablemultiupload2').style.display = 'block';
+		</script>
+		
+		
 		</div>
 	</div>
 
