@@ -12,6 +12,11 @@ include_once("./Services/Repository/classes/class.ilRepositoryObjectPlugin.php")
 */
 class ilGalleryPlugin extends ilRepositoryObjectPlugin
 {
+	
+	protected function uninstallCustom() {
+	}
+	
+	
 	function getPluginName()
 	{
 		return "Gallery";
