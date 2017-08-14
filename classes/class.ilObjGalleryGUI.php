@@ -234,6 +234,10 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 // Show content
 //
 
+	function myTxt($txt) {
+		return $this->plugin->txt($txt);
+	}
+
 	/**
 	* Show content
 	*/

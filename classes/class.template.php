@@ -104,7 +104,8 @@ class template {
 	}
 
 	function txt($txt) {
-	    return $this->obj->plugin->txt($txt);
+	    //return $this->obj->plugin->txt($txt);
+	    return $this->obj->myTxt($txt);
 	}
 
 	function clearVariable() {
