@@ -4,7 +4,8 @@
 
 	<form action="<?php echo $VARS->get('contentLink');?>&album_id=<?php echo $albumSelect->get('id');?>" method="post" enctype="multipart/form-data" id="deletepicturesform">
 	    <input type="hidden" name="deletepictures" id="deletepictures" value="0" />
-	    <?php foreach($VARS->get('pictures') as $key => $picture) { ?>
+	    <?php
+        foreach($VARS->get('pictures') as $key => $picture) { ?>
 		<div style="margin:0 5px 5px 0;border: solid 1px gray;background-color: white;float:left;padding:5px;">
 		    <a href="<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=1000&height=800" rel="img_group" class="lytebox" data-lyte-options="group:album" data-title="<?php echo $picture->get('title');?>" title="<?php echo $picture->get('title');?>" onclick="return false;"><img src='<?php echo $VARS->get('contentLink').'&album_id='.$albumSelect->get('id').'&imgout='.$key; ?>&width=100&height=100&upscale=1&quad=1' title="<?php echo $picture->get('title');?>" width="100" height="100" /></a><br/>
 		    <div style="height:12px;width:100px;overflow:hidden;font-size:7pt;padding-top:3px;">
@@ -32,9 +33,15 @@
 		document.getElementById('deletePictures').style.display = 'none';
 		document.getElementById('deleteAlbum').style.display = 'none';
 	    }
-	    
-	    $(function() {
-	    		    $('a[rel=img_group]').fancybox({'type' : 'image'});
+
+        $(function() {
+	    		    $('a[rel=img_group]').fancybox({
+                        'type' : 'image',
+                        'autoPlay'   : '<?php echo (bool)$VARS->get('slideshow_enabled'); ?>',
+                         'playSpeed'  : '<?php echo $VARS->get('slideshow_seconds')*1000; ?>',
+                        'preload'    : '3',
+                        'loop'       : '<?php echo (bool)$VARS->get('slideshow_repeat'); ?>'
+                    });
 	    });
 	    
 	</script>

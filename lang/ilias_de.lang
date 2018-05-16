@@ -57,3 +57,7 @@ freie_alben#:#freigegebene Alben
 plugininfo#:#Plugin-Information
 Bild#:#Bild
 Bilder#:#Bilder
+startSlideShow#:#Slideshow starten
+slideshow_enabled#:#Slideshow aktivieren
+slideshow_seconds#:#Bild-Anzeigedauer in Sekunden
+slideshow_repeat#:#Slideshow wiederholen

@@ -70,3 +70,14 @@
     ?>
 </td>
 </tr></table>
+<script>
+    $(function () {
+        $('a[rel=img_group]').fancybox({
+            'type': 'image',
+            'autoPlay': '<?php echo (bool)$VARS->get('slideshow_enabled'); ?>',
+            'playSpeed': '<?php echo $VARS->get('slideshow_seconds') * 1000; ?>',
+            'preload': '3',
+            'loop': '<?php echo (bool)$VARS->get('slideshow_repeat'); ?>'
+        });
+    });
+</script>

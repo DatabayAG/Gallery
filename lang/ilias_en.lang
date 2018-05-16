@@ -61,3 +61,7 @@ freie_alben#:#public galleries
 plugininfo#:#Plugin-Information
 Bild#:#Picture
 Bilder#:#Pictures
+startSlideShow#:#Start slideshow
+slideshow_enabled#:#Enable Slideshow
+slideshow_seconds#:#Image display time in seconds
+slideshow_repeat#:#Repeat slideshow
