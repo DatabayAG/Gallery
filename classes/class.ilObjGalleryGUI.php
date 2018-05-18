@@ -34,7 +34,10 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 	*/
 	protected function afterConstructor()
 	{
-		$this->init();
+		if($this->object)
+		{
+			$this->init();
+		}
 	}
 	
 	/**
