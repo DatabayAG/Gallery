@@ -127,8 +127,6 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 		$info = new ilInfoScreenGUI($this);
 
 		$info->addSection($this->txt("plugininfo"));
-		$info->addProperty('Name', 'Fotogalerie');
-		$info->addProperty('Version', xgal_version);
 		$info->addProperty('Developer', 'Aresch Yavari');
 		$info->addProperty('Kontakt', 'ay@databay.de');
 		$info->addProperty('&nbsp;', 'Databay AG');
