@@ -115,39 +115,39 @@ class ilObjGalleryGUI extends ilObjectPluginGUI
 	/**
 	* show information screen
 	*/
-	function infoScreen()
-	{
-		global $ilAccess, $ilUser, $lng, $ilCtrl, $tpl, $ilTabs;
-
-		$ilTabs->setTabActive("info_short");
-
-		$this->checkPermission("visible");
-
-		include_once("./Services/InfoScreen/classes/class.ilInfoScreenGUI.php");
-		$info = new ilInfoScreenGUI($this);
-
-		$info->addSection($this->txt("plugininfo"));
-		$info->addProperty('Developer', 'Aresch Yavari');
-		$info->addProperty('Kontakt', 'ay@databay.de');
-		$info->addProperty('&nbsp;', 'Databay AG');
-		$info->addProperty('&nbsp;', '<img src="http://www.iliasnet.de/download/databay.png?plug=gallery" alt="Databay AG" title="Databay AG" />');
-		$info->addProperty('&nbsp;', "http://www.iliasnet.de");
-		
-
-		$info->enablePrivateNotes();
-
-		// general information
-		$lng->loadLanguageModule("meta");
-
-		$this->addInfoItems($info);
-
-
-		// forward the command
-		$ret = $ilCtrl->forwardCommand($info);
-
-
-		//$tpl->setContent($ret);
-	}
+//	function infoScreen()
+//	{
+//		global $ilAccess, $ilUser, $lng, $ilCtrl, $tpl, $ilTabs;
+//
+//		$ilTabs->setTabActive("info_short");
+//
+//		$this->checkPermission("visible");
+//
+//		include_once("./Services/InfoScreen/classes/class.ilInfoScreenGUI.php");
+//		$info = new ilInfoScreenGUI($this);
+//
+//		$info->addSection($this->txt("plugininfo"));
+//		$info->addProperty('Developer', 'Aresch Yavari');
+//		$info->addProperty('Kontakt', 'ay@databay.de');
+//		$info->addProperty('&nbsp;', 'Databay AG');
+//		$info->addProperty('&nbsp;', '<img src="http://www.iliasnet.de/download/databay.png?plug=gallery" alt="Databay AG" title="Databay AG" />');
+//		$info->addProperty('&nbsp;', "http://www.iliasnet.de");
+//
+//
+//		$info->enablePrivateNotes();
+//
+//		// general information
+//		$lng->loadLanguageModule("meta");
+//
+//		$this->addInfoItems($info);
+//
+//
+//		// forward the command
+//		$ret = $ilCtrl->forwardCommand($info);
+//
+//
+//		//$tpl->setContent($ret);
+//	}
 //
 // DISPLAY TABS
 //
